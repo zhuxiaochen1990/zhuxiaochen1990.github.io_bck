@@ -47,54 +47,42 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			
-			<img src="/img/headportrait.png" class="js-avatar show">
-			
+			<% if (theme.animate){ %>
+			<img src="<%=theme.avatar%>" class="js-avatar">
+			<%}else{%>
+			<img src="<%=theme.avatar%>" class="js-avatar" style="width: 100%;height: 100%;opacity: 1;">
+			<%}%>
 		</a>
 
 		<hgroup>
-		  <h1 class="header-author"><a href="/">晓晨</a></h1>
+		  <h1 class="header-author"><a href="/"><%=theme.author%></a></h1>
 		</hgroup>
 
-		
-		<p class="header-subtitle">天将晓，晨未明</p>
-		
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
 
 		<nav class="header-menu">
 			<ul>
-			
-				<li><a href="/">主页</a></li>
-	        
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
-	        
-    		
-    			
-    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
-    			
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
-    			
-    			
-            
-    			
-    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">联系我</a>
-    			
-    			
-            
+	        <% var count = 0 %>
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+    			<a class="js-smart-menu" data-idx="<%-count%>" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+    			<% count++ %>
+    			<% } %>
+            <%}%>
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
-				
-					<a class="github" target="_blank" href="https://github.com/zhuxiaochen1990" title="github">github</a>
-		        
-					<a class="weibo" target="_blank" href="http://weibo.com/platoo2011" title="weibo">weibo</a>
-		        
-					<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-		        
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><%= i %></a>
+		        <%}%>
 			</div>
 		</nav>
 	</header>		
